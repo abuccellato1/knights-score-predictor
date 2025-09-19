@@ -1,5 +1,5 @@
 import './style.css'
-import { Crown, Plus, Minus, RotateCcw, Trophy, Users } from 'lucide-icons'
+import { Crown, Plus, Minus, RotateCcw, Trophy, Users } from 'lucide'
 
 class KnightsScoreApp {
   constructor() {
