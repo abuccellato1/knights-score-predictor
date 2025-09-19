@@ -1,15 +1,4 @@
 import './style.css'
-import { Crown, Plus, Minus, RotateCcw, Trophy, Users, CreativeCommons as createIcons } from 'lucide'
-
-// Initialize icons
-const icons = createIcons({
-  Crown,
-  Plus,
-  Minus,
-  RotateCcw,
-  Trophy,
-  Users
-})
 
 class KnightsScoreApp {
   constructor() {
@@ -22,6 +11,19 @@ class KnightsScoreApp {
   init() {
     this.render()
     this.attachEventListeners()
+  }
+
+  // Simple SVG icons as strings
+  getIcon(name, size = 24, className = '') {
+    const icons = {
+      crown: `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${className}"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></svg>`,
+      plus: `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${className}"><path d="M5 12h14"/><path d="m12 5 0 14"/></svg>`,
+      minus: `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${className}"><path d="M5 12h14"/></svg>`,
+      rotateCcw: `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${className}"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>`,
+      trophy: `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${className}"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55.47.98.97 1.21C12.04 18.75 13 20.24 13 22"/><path d="M14 14.66V17c0 .55-.47.98-.97 1.21C11.96 18.75 11 20.24 11 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>`,
+      users: `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${className}"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m22 21-3.3-3.3a4.8 4.8 0 0 0 0-6.4 4.8 4.8 0 0 0-6.4 0 4.8 4.8 0 0 0 0 6.4A4.8 4.8 0 0 0 22 21z"/></svg>`
+    }
+    return icons[name] || ''
   }
 
   addPlayer() {
@@ -171,16 +173,16 @@ class KnightsScoreApp {
         <header class="header">
           <div class="header-content">
             <div class="title-section">
-              ${Crown.toSvg({ size: 32, class: 'crown-icon' })}
+              ${this.getIcon('crown', 32, 'crown-icon')}
               <h1>Knights Score Tracker</h1>
             </div>
             <div class="game-controls">
               <button class="btn btn-secondary" data-action="reset-scores">
-                ${RotateCcw.toSvg({ size: 18 })}
+                ${this.getIcon('rotateCcw', 18)}
                 Reset Scores
               </button>
               <button class="btn btn-secondary" data-action="new-game">
-                ${Users.toSvg({ size: 18 })}
+                ${this.getIcon('users', 18)}
                 New Game
               </button>
             </div>
@@ -190,11 +192,11 @@ class KnightsScoreApp {
         <main class="main">
           ${this.players.length === 0 ? `
             <div class="empty-state">
-              <div class="empty-icon">${Crown.toSvg({ size: 64 })}</div>
+              <div class="empty-icon">${this.getIcon('crown', 64)}</div>
               <h2>Ready to Begin?</h2>
               <p>Add your first knight to start tracking scores</p>
               <button class="btn btn-primary btn-large" data-action="add-player">
-                ${Plus.toSvg({ size: 20 })}
+                ${this.getIcon('plus', 20)}
                 Add First Knight
               </button>
             </div>
@@ -202,7 +204,7 @@ class KnightsScoreApp {
             <div class="game-area">
               ${winner && winner.score > 0 ? `
                 <div class="winner-banner">
-                  ${Trophy.toSvg({ size: 24 })}
+                  ${this.getIcon('trophy', 24)}
                   <span><strong>${winner.name}</strong> is leading with ${winner.score} points!</span>
                 </div>
               ` : ''}
@@ -237,10 +239,10 @@ class KnightsScoreApp {
                       <div class="score-display">${player.score}</div>
                       <div class="score-controls">
                         <button class="score-btn decrease" data-action="decrease-score" data-player-id="${player.id}">
-                          ${Minus.toSvg({ size: 16 })}
+                          ${this.getIcon('minus', 16)}
                         </button>
                         <button class="score-btn increase" data-action="increase-score" data-player-id="${player.id}">
-                          ${Plus.toSvg({ size: 16 })}
+                          ${this.getIcon('plus', 16)}
                         </button>
                       </div>
                     </div>
@@ -250,7 +252,7 @@ class KnightsScoreApp {
               
               <div class="add-player-section">
                 <button class="btn btn-primary" data-action="add-player">
-                  ${Plus.toSvg({ size: 18 })}
+                  ${this.getIcon('plus', 18)}
                   Add Knight
                 </button>
               </div>
