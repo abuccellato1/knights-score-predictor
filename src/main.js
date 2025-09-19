@@ -1,5 +1,5 @@
 import './style.css'
-import { Crown, Plus, Minus, RotateCcw, Trophy, Users, createIcons } from 'lucide'
+import { Crown, Plus, Minus, RotateCcw, Trophy, Users, CreativeCommons as createIcons } from 'lucide'
 
 // Initialize icons
 const icons = createIcons({
@@ -171,16 +171,16 @@ class KnightsScoreApp {
         <header class="header">
           <div class="header-content">
             <div class="title-section">
-              ${icons.Crown.toSvg({ size: 32, class: 'crown-icon' })}
+              ${Crown.toSvg({ size: 32, class: 'crown-icon' })}
               <h1>Knights Score Tracker</h1>
             </div>
             <div class="game-controls">
               <button class="btn btn-secondary" data-action="reset-scores">
-                ${icons.RotateCcw.toSvg({ size: 18 })}
+                ${RotateCcw.toSvg({ size: 18 })}
                 Reset Scores
               </button>
               <button class="btn btn-secondary" data-action="new-game">
-                ${icons.Users.toSvg({ size: 18 })}
+                ${Users.toSvg({ size: 18 })}
                 New Game
               </button>
             </div>
@@ -190,11 +190,11 @@ class KnightsScoreApp {
         <main class="main">
           ${this.players.length === 0 ? `
             <div class="empty-state">
-              <div class="empty-icon">${icons.Crown.toSvg({ size: 64 })}</div>
+              <div class="empty-icon">${Crown.toSvg({ size: 64 })}</div>
               <h2>Ready to Begin?</h2>
               <p>Add your first knight to start tracking scores</p>
               <button class="btn btn-primary btn-large" data-action="add-player">
-                ${icons.Plus.toSvg({ size: 20 })}
+                ${Plus.toSvg({ size: 20 })}
                 Add First Knight
               </button>
             </div>
@@ -202,7 +202,7 @@ class KnightsScoreApp {
             <div class="game-area">
               ${winner && winner.score > 0 ? `
                 <div class="winner-banner">
-                  ${icons.Trophy.toSvg({ size: 24 })}
+                  ${Trophy.toSvg({ size: 24 })}
                   <span><strong>${winner.name}</strong> is leading with ${winner.score} points!</span>
                 </div>
               ` : ''}
@@ -237,10 +237,10 @@ class KnightsScoreApp {
                       <div class="score-display">${player.score}</div>
                       <div class="score-controls">
                         <button class="score-btn decrease" data-action="decrease-score" data-player-id="${player.id}">
-                          ${icons.Minus.toSvg({ size: 16 })}
+                          ${Minus.toSvg({ size: 16 })}
                         </button>
                         <button class="score-btn increase" data-action="increase-score" data-player-id="${player.id}">
-                          ${icons.Plus.toSvg({ size: 16 })}
+                          ${Plus.toSvg({ size: 16 })}
                         </button>
                       </div>
                     </div>
@@ -250,7 +250,7 @@ class KnightsScoreApp {
               
               <div class="add-player-section">
                 <button class="btn btn-primary" data-action="add-player">
-                  ${icons.Plus.toSvg({ size: 18 })}
+                  ${Plus.toSvg({ size: 18 })}
                   Add Knight
                 </button>
               </div>
